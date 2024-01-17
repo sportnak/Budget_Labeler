@@ -33,7 +33,7 @@ def clean_data(data):
 # X is the feature (Text) and y is the target variable (Category)
 
 # Create a DataFrame with a single column named 'Text'
-df = pd.read_csv('./data_5col.csv')
+df = pd.read_csv('./crawford.csv')
 
 # Display summary statistics to identify outliers
 # print("Summary Statistics:")
@@ -56,7 +56,6 @@ Y = df['Category']
 
 
 # Split the dataset into training and testing sets
-# X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
 # Summary statistics for the training dataset
 print("Training Dataset Summary:")
 print(X.describe())
@@ -69,8 +68,8 @@ transformer = ColumnTransformer([
 
 
 X_train_vectorized = transformer.fit_transform(X)
-
 sample_weights = compute_sample_weight('balanced',  y=Y)
+
 # Initialize and train a simple model (Naive Bayes classifier in this case)
 model = RandomForestClassifier(n_estimators=50, random_state=42)
 model.fit(X_train_vectorized, Y)
@@ -94,18 +93,7 @@ model.fit(X_train_vectorized, Y)
 # print(f"Model Accuracy: {accuracy}")
 
 # # Display classification report for more detailed metrics
-# print(classification_report(Y_test, predictions))
 predict_file(lambda x: clean_data(x), model, transformer)
-
-
-# Example usage:
-# data_to_write = [
-#     ["John", 25, "New York"],
-#     ["Alice", 30, "San Francisco"],
-#     ["Bob", 22, "Los Angeles"]
-# ]
-
-# write_to_csv("example.csv", data_to_write, header=["Name", "Age", "City"])
 
 # Show feature importances
 # feature_importances = model.feature_importances_

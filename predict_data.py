@@ -3,24 +3,6 @@ import numpy as np
 import pandas as pd
 
 def write_to_csv(file_path, data, header=None):
-    # """
-    # Write data to a CSV file.
-
-    # Parameters:
-    # - file_path (str): The path to the CSV file.
-    # - data (list of lists): The data to be written to the CSV file.
-    # - header (list, optional): The header row for the CSV file.
-
-    # Example:
-    # >>> data = [
-    # ...     ["Name", "Age", "City"],
-    # ...     ["John", 25, "New York"],
-    # ...     ["Alice", 30, "San Francisco"],
-    # ...     ["Bob", 22, "Los Angeles"]
-    # ... ]
-    # >>> write_to_csv("example.csv", data, header=["Name", "Age", "City"])
-    # """
-
     with open(file_path, mode='w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file)
 
@@ -33,7 +15,7 @@ def write_to_csv(file_path, data, header=None):
 
 
 def predict_file(clean_data, model, transformer):
-    test_df = pd.read_csv('./test_data_2.csv')
+    test_df = pd.read_csv('./crawford_test.csv')
     X_test = clean_data(test_df.copy())
 
     X_test_vectorized = transformer.transform(X_test)
